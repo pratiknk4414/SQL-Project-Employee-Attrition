@@ -1,0 +1,73 @@
+select * from HR_General_Data
+
+
+---Q.1] How may employee have done attrition
+
+select Emp_Name, Attrition from HR_General_Data
+where Attrition=1
+
+---### Total Attrition of Employee = 711
+
+---Q.2] Find how many female did attrition
+
+Select Emp_Name, Attrition, Gender from HR_General_Data
+where Gender = 'Female' and Attrition=1
+
+---### Conclusion : 270 females
+
+---Q.3] Find how many male did attrition
+
+select Emp_name, Attrition, Gender from HR_General_Data
+where gender = 'Male'and Attrition=1
+
+---### Conclusion : 441 Males
+
+---#### Conclusion: male employees are than female who did attrition
+
+---Q.4] Finde departmentwise attrition count
+
+select Department, 
+sum(case when Attrition=1 then 1 else 0 end) as Attrition_Count,
+Sum(case when Attrition=0 then 1 else 0 end) as No_Attrition_Count from HR_General_Data
+Group by Department
+Order by Attrition_Count desc
+
+---#### Conclusion: Research & Developement department have Highest attrition of 453 employee
+
+
+---Q.5] find the employee whos age above 50
+
+Select Emp_Name, Age, Attrition from HR_General_Data
+where Age>50 and Attrition=1
+
+---Q.6] Employee with highest salary with its Department
+
+select top 1 Emp_Name,Department, MonthlyIncome from HR_General_Data
+order by MonthlyIncome desc
+
+---### Research and Development department have the Higgest Salary employee
+
+
+---Q.7] Employee with its Lowest salary and its Department
+
+select top 1 Emp_Name, Department, MonthlyIncome from HR_General_Data
+order by MonthlyIncome 
+
+---### Sales department have the lowest salary employee
+
+---Q.8]List the employees who have worked for the company the longest but haven't had a promotion.
+
+Select Emp_name, Yearsatcompany, yearssincelastpromotion from HR_General_Data
+where YearsSinceLastPromotion=0 
+order by YearsAtCompany desc
+
+---### total 1743 Employee are there
+
+----- Find from them how many employee have done attrition 
+
+Select emp_name, Attrition, Yearsatcompany, yearssincelastpromotion from HR_General_Data
+where YearsSinceLastPromotion=0 and Attrition=1
+order by YearsAtCompany desc
+
+---### from 1743 employee 330 employee have done attrition
+
